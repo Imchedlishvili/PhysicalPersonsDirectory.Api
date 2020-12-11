@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PhysicalPersonsDirectory.Domain.DomainClasses
+﻿namespace PhysicalPersonsDirectory.Domain.DomainClasses
 {
     public class RelatedPerson
     {

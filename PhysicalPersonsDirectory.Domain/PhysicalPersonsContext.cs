@@ -110,7 +110,6 @@ namespace PhysicalPersonsDirectory.Domain
             });
         }
 
-
         public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<PhoneType> PhoneTypes { get; set; }
         public virtual DbSet<RelationType> RelationTypes { get; set; }
