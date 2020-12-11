@@ -22,5 +22,6 @@ namespace PhysicalPersonsDirectory.Domain.DomainClasses
 
         public IList<PersonPhone> PersonPhones { get; set; }
         public IList<RelatedPerson> RelatedPersons { get; set; }
+        public IList<RelatedPerson> RelatedPersonNavigations { get; set; }
     }
 }

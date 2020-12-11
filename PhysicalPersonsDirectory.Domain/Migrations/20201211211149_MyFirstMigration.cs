@@ -128,11 +128,17 @@ namespace PhysicalPersonsDirectory.Domain.Migrations
                 {
                     table.PrimaryKey("PK_RelatedPerson_ID", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_RelatedPersons_Persons_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "Persons",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_RelatedPersons_Persons_RelatedPersonId",
                         column: x => x.RelatedPersonId,
                         principalTable: "Persons",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_RelatedPersons_RelationTypes_RelationTypeId",
                         column: x => x.RelationTypeId,
@@ -160,6 +166,11 @@ namespace PhysicalPersonsDirectory.Domain.Migrations
                 name: "IX_Persons_GenderId",
                 table: "Persons",
                 column: "GenderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RelatedPersons_PersonId",
+                table: "RelatedPersons",
+                column: "PersonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RelatedPersons_RelatedPersonId",

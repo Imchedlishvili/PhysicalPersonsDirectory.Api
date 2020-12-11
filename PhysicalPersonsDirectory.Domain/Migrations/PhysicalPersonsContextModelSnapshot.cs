@@ -157,6 +157,8 @@ namespace PhysicalPersonsDirectory.Domain.Migrations
                     b.HasKey("Id")
                         .HasName("PK_RelatedPerson_ID");
 
+                    b.HasIndex("PersonId");
+
                     b.HasIndex("RelatedPersonId");
 
                     b.HasIndex("RelationTypeId");
@@ -221,8 +223,14 @@ namespace PhysicalPersonsDirectory.Domain.Migrations
                 {
                     b.HasOne("PhysicalPersonsDirectory.Domain.DomainClasses.Person", "Person")
                         .WithMany("RelatedPersons")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PhysicalPersonsDirectory.Domain.DomainClasses.Person", "RelatedPersonNavigation")
+                        .WithMany("RelatedPersonNavigations")
                         .HasForeignKey("RelatedPersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("PhysicalPersonsDirectory.Domain.DomainClasses.RelationType", "RelationType")
@@ -232,6 +240,8 @@ namespace PhysicalPersonsDirectory.Domain.Migrations
                         .IsRequired();
 
                     b.Navigation("Person");
+
+                    b.Navigation("RelatedPersonNavigation");
 
                     b.Navigation("RelationType");
                 });
@@ -249,6 +259,8 @@ namespace PhysicalPersonsDirectory.Domain.Migrations
             modelBuilder.Entity("PhysicalPersonsDirectory.Domain.DomainClasses.Person", b =>
                 {
                     b.Navigation("PersonPhones");
+
+                    b.Navigation("RelatedPersonNavigations");
 
                     b.Navigation("RelatedPersons");
                 });

@@ -51,12 +51,18 @@ namespace PhysicalPersonsDirectory.Domain
             modelBuilder.Entity<Person>(entity =>
             {
                 entity.HasKey(t => t.Id).HasName("PK_Person_ID");
+
                 entity.HasOne<Gender>(g => g.Gender)
                       .WithMany(p => p.Persons)
                       .HasForeignKey(g => g.GenderId);
+
                 entity.HasOne<City>(c => c.City)
                       .WithMany(p => p.Persons)
                       .HasForeignKey(c => c.CityId);
+
+                entity.HasIndex(e => e.CityId, "IX_Persons_CityId");
+                entity.HasIndex(e => e.GenderId, "IX_Persons_GenderId");
+
                 entity.Property(t => t.Fname).IsRequired().HasMaxLength(50);
                 entity.Property(t => t.Lname).IsRequired().HasMaxLength(50);
                 entity.Property(t => t.PersonalNumber).IsRequired().HasMaxLength(11);
@@ -66,27 +72,41 @@ namespace PhysicalPersonsDirectory.Domain
             modelBuilder.Entity<PersonPhone>(entity =>
             {
                 entity.HasKey(t => t.Id).HasName("PK_PersonPhone_ID");
+
                 entity.HasOne<PhoneType>(pt => pt.PhoneType)
                       .WithMany(pp => pp.PersonPhones)
                       .HasForeignKey(pt => pt.PhoneTypeId);
+
                 entity.HasOne<Person>(p => p.Person)
                       .WithMany(pp => pp.PersonPhones)
                       .HasForeignKey(pp => pp.PersonId);
+
+                entity.HasIndex(e => e.PersonId, "IX_PersonPhones_PersonId");
+                entity.HasIndex(e => e.PhoneTypeId, "IX_PersonPhones_PhoneTypeId");
+
                 entity.Property(t => t.PhoneNumber).IsRequired().HasMaxLength(50);
             });
 
             modelBuilder.Entity<RelatedPerson>(entity =>
             {
                 entity.HasKey(rp => rp.Id).HasName("PK_RelatedPerson_ID");
+
                 entity.HasOne<Person>(p => p.Person)
                       .WithMany(rp => rp.RelatedPersons)
-                      .HasForeignKey(rp => rp.PersonId);
-                entity.HasOne<Person>(p => p.Person)
-                     .WithMany(rp => rp.RelatedPersons)
-                     .HasForeignKey(rp => rp.RelatedPersonId);
+                      .HasForeignKey(rp => rp.PersonId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne<Person>(p => p.RelatedPersonNavigation)
+                     .WithMany(rp => rp.RelatedPersonNavigations)
+                     .HasForeignKey(rp => rp.RelatedPersonId)
+                     .OnDelete(DeleteBehavior.Restrict);
+
                 entity.HasOne<RelationType>(rt => rt.RelationType)
                      .WithMany(rp => rp.RelatedPersons)
                      .HasForeignKey(rp => rp.RelationTypeId);
+
+                entity.HasIndex(e => e.RelatedPersonId, "IX_RelatedPersons_RelatedPersonId");
+                entity.HasIndex(e => e.RelationTypeId, "IX_RelatedPersons_RelationTypeId");
             });
         }
 

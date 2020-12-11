@@ -12,6 +12,7 @@ namespace PhysicalPersonsDirectory.Domain.DomainClasses
         public int RelationTypeId { get; set; }
 
         public Person Person { get; set; }
+        public Person RelatedPersonNavigation { get; set; }
         public RelationType RelationType { get; set; }
     }
 }
