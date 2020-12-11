@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace PhysicalPersonsDirectory.Domain.DomainClasses
 {
@@ -8,5 +6,7 @@ namespace PhysicalPersonsDirectory.Domain.DomainClasses
     {
         public int Id { get; set; }
         public string PhoneTypeName { get; set; }
+
+        public IList<Phone> Phones { get; set; }
     }
 }
