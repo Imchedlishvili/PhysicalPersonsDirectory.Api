@@ -9,5 +9,6 @@ namespace PhysicalPersonsDirectory.Domain.DomainClasses
         public int Id { get; set; }
         public int PersonId { get; set; }
         public int RelatedPersonId { get; set; }
+        public int RelationTypeId { get; set; }
     }
 }
