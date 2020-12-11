@@ -4,5 +4,19 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PhysicalPersonsDirectory.Common\PhysicalPersonsDirectory.Common.csproj" />
+    <ProjectReference Include="..\PhysicalPersonsDirectory.Domain\PhysicalPersonsDirectory.Domain.csproj" />
+    <ProjectReference Include="..\PhysicalPersonsDirectory.Services.Models\PhysicalPersonsDirectory.Services.Models.csproj" />
+    <ProjectReference Include="..\PhysicalPersonsDirectory.Services\PhysicalPersonsDirectory.Services.csproj" />
+  </ItemGroup>
+
 
 </Project>
