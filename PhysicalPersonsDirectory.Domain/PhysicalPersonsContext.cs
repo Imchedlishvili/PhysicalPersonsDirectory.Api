@@ -48,42 +48,55 @@ namespace PhysicalPersonsDirectory.Domain
                 entity.Property(t => t.CityName).IsRequired();
             });
 
-            modelBuilder.Entity<Phone>(entity =>
-            {
-                entity.HasKey(t => t.Id).HasName("PK_Phone_ID");
-                entity.HasOne<PhoneType>(pt => pt.PhoneType)
-                      .WithMany(p => p.Phones)
-                      .HasForeignKey(pt => pt.PhoneTypeId);
-                entity.Property(t => t.PhoneNumber).IsRequired().HasMaxLength(50);
-            });
-
             modelBuilder.Entity<Person>(entity =>
             {
                 entity.HasKey(t => t.Id).HasName("PK_Person_ID");
                 entity.HasOne<Gender>(g => g.Gender)
                       .WithMany(p => p.Persons)
-                      .HasForeignKey(g=>g.Gender);
+                      .HasForeignKey(g => g.GenderId);
                 entity.HasOne<City>(c => c.City)
                       .WithMany(p => p.Persons)
                       .HasForeignKey(c => c.CityId);
-
-                entity.Property(t => t.Fname).IsRequired();
-                entity.Property(t => t.Lname).IsRequired();
+                entity.Property(t => t.Fname).IsRequired().HasMaxLength(50);
+                entity.Property(t => t.Lname).IsRequired().HasMaxLength(50);
                 entity.Property(t => t.PersonalNumber).IsRequired().HasMaxLength(11);
                 entity.Property(t => t.BirthDate).IsRequired();
             });
+
+            modelBuilder.Entity<PersonPhone>(entity =>
+            {
+                entity.HasKey(t => t.Id).HasName("PK_PersonPhone_ID");
+                entity.HasOne<PhoneType>(pt => pt.PhoneType)
+                      .WithMany(pp => pp.PersonPhones)
+                      .HasForeignKey(pt => pt.PhoneTypeId);
+                entity.HasOne<Person>(p => p.Person)
+                      .WithMany(pp => pp.PersonPhones)
+                      .HasForeignKey(pp => pp.PersonId);
+                entity.Property(t => t.PhoneNumber).IsRequired().HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<RelatedPerson>(entity =>
+            {
+                entity.HasKey(rp => rp.Id).HasName("PK_RelatedPerson_ID");
+                entity.HasOne<Person>(p => p.Person)
+                      .WithMany(rp => rp.RelatedPersons)
+                      .HasForeignKey(rp => rp.PersonId);
+                entity.HasOne<Person>(p => p.Person)
+                     .WithMany(rp => rp.RelatedPersons)
+                     .HasForeignKey(rp => rp.RelatedPersonId);
+                entity.HasOne<RelationType>(rt => rt.RelationType)
+                     .WithMany(rp => rp.RelatedPersons)
+                     .HasForeignKey(rp => rp.RelationTypeId);
+            });
         }
+
 
         public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<PhoneType> PhoneTypes { get; set; }
         public virtual DbSet<RelationType> RelationTypes { get; set; }
-
         public virtual DbSet<City> Citys { get; set; }
-        public virtual DbSet<Phone> Phones { get; set; }
-
         public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<PersonPhone> PersonPhones { get; set; }
         public virtual DbSet<RelatedPerson> RelatedPersons { get; set; }
-
     }
 }

@@ -19,5 +19,8 @@ namespace PhysicalPersonsDirectory.Domain.DomainClasses
 
         public int CityId { get; set; }
         public City City { get; set; }
+
+        public IList<PersonPhone> PersonPhones { get; set; }
+        public IList<RelatedPerson> RelatedPersons { get; set; }
     }
 }

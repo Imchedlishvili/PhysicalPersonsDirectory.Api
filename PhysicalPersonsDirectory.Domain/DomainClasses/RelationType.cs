@@ -8,5 +8,7 @@ namespace PhysicalPersonsDirectory.Domain.DomainClasses
     {
         public int Id { get; set; }
         public string RelationTypeName { get; set; }
+
+        public IList<RelatedPerson> RelatedPersons { get; set; }
     }
 }

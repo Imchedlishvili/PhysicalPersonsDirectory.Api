@@ -7,6 +7,6 @@ namespace PhysicalPersonsDirectory.Domain.DomainClasses
         public int Id { get; set; }
         public string PhoneTypeName { get; set; }
 
-        public IList<Phone> Phones { get; set; }
+        public IList<PersonPhone> PersonPhones { get; set; }
     }
 }
