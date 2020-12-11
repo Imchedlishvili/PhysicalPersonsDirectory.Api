@@ -10,10 +10,9 @@ namespace PhysicalPersonsDirectory.Domain.DomainClasses
         public string Fname { get; set; }
         public string Lname { get; set; }
         public int GenderId { get; set; }
-
-        public string PersonalNumber { get; set; }
+        public string PersonalNumber { get; set; }        
         public DateTime BirthDate { get; set; }
         public int CityId { get; set; }
-        public int PhoneId { get; set; }
+        public string ImagePatch { get; set; }        
     }
 }
