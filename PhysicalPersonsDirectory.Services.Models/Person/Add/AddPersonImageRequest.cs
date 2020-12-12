@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PhysicalPersonsDirectory.Services.Models.PhysicalPerson.Add
+namespace PhysicalPersonsDirectory.Services.Models.Person.Add
 {
     public class AddPersonImageRequest
     {

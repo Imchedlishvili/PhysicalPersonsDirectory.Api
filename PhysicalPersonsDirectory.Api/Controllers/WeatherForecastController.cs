@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PhysicalPersonsDirectory.Services.Models.Person.Add;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace PhysicalPersonsDirectory.Api.Controllers
         }
 
         [HttpGet]
+        
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
@@ -34,6 +36,21 @@ namespace PhysicalPersonsDirectory.Api.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+
+        [HttpPost("Test")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public void Test(AddPersonRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var ss = 5;
+            }
+
+            var tt = 1;
         }
     }
 }

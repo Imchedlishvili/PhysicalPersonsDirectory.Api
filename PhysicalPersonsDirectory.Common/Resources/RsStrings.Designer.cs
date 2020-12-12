@@ -22,7 +22,7 @@ namespace PhysicalPersonsDirectory.Common.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class RsStrings {
+    public class RsStrings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PhysicalPersonsDirectory.Common.Resources.RsStrings", typeof(RsStrings).Assembly);
@@ -51,12 +51,129 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to პირადი ნომერი სავალდებულო ველია.
+        /// </summary>
+        public static string PersonalNumberIsRequred {
+            get {
+                return ResourceManager.GetString("PersonalNumberIsRequred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to პირადი ნომერი უნდა შეიცავდეს 11 -ციფრს.
+        /// </summary>
+        public static string PersonalNumberLengthRestrict {
+            get {
+                return ResourceManager.GetString("PersonalNumberLengthRestrict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to პირადი ნომერი უნდა შეიცავდეს მხოლოდ ციფრებს.
+        /// </summary>
+        public static string PersonalNumberRestrict {
+            get {
+                return ResourceManager.GetString("PersonalNumberRestrict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to პიროვნება მინიმუმ 18 წლის უნდა იყოს.
+        /// </summary>
+        public static string PersonBirthDateAgeRestrict {
+            get {
+                return ResourceManager.GetString("PersonBirthDateAgeRestrict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to დაბადების თარიღი სავალდებულო ველია.
+        /// </summary>
+        public static string PersonBirthDateIsRequred {
+            get {
+                return ResourceManager.GetString("PersonBirthDateIsRequred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ფიზიკური პირის სახელი სავალდებულო ველია.
+        /// </summary>
+        public static string PersonFnameIsRequred {
+            get {
+                return ResourceManager.GetString("PersonFnameIsRequred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to სახელი უნდა შეიცავდეს მაქსიმუმ 50 -სიმბოლოს.
+        /// </summary>
+        public static string PersonFnameMaxLengthRestrict {
+            get {
+                return ResourceManager.GetString("PersonFnameMaxLengthRestrict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to სახელი უნდა შეიცავდეს მინიმუმ 2 -სიმბოლოს.
+        /// </summary>
+        public static string PersonFnameMinLengthRestrict {
+            get {
+                return ResourceManager.GetString("PersonFnameMinLengthRestrict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to სახელი უნდა შეიცავდეს მხოლოდ ქართული ან ლათინური ანბანის ასოებს.
+        /// </summary>
+        public static string PersonFnameRestrict {
+            get {
+                return ResourceManager.GetString("PersonFnameRestrict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ფიზიკური პირის გვარი სავალდებულო ველია.
+        /// </summary>
+        public static string PersonLnameIsRequred {
+            get {
+                return ResourceManager.GetString("PersonLnameIsRequred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to გვარი უნდა შეიცავდეს მაქსიმუმ 50 -სიმბოლოს.
+        /// </summary>
+        public static string PersonLnameMaxLengthRestrict {
+            get {
+                return ResourceManager.GetString("PersonLnameMaxLengthRestrict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to გვარი უნდა შეიცავდეს მინიმუმ 2 -სიმბოლოს.
+        /// </summary>
+        public static string PersonLnameMinLengthRestrict {
+            get {
+                return ResourceManager.GetString("PersonLnameMinLengthRestrict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to გვარი უნდა შეიცავდეს მხოლოდ ქართული ან ლათინური ანბანის ასოებს.
+        /// </summary>
+        public static string PersonLnameRestrict {
+            get {
+                return ResourceManager.GetString("PersonLnameRestrict", resourceCulture);
             }
         }
     }
