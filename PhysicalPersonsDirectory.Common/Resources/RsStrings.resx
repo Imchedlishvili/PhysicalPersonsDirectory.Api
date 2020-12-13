@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddPersonException" xml:space="preserve">
+    <value>პიროვნების დამატების დროს მოხდა შეცდომა</value>
+  </data>
+  <data name="OperationCompleted" xml:space="preserve">
+    <value>ოპერაცია წარმატებით შესრულდ</value>
+  </data>
   <data name="PersonalNumberIsRequred" xml:space="preserve">
     <value>პირადი ნომერი სავალდებულო ველია</value>
   </data>
@@ -161,5 +167,8 @@
   </data>
   <data name="PhoneNumberMinLengthRestrict" xml:space="preserve">
     <value>ტელეფონი უნდა შეიცავდეს მინიმუმ 4 -სიმბოლოს</value>
+  </data>
+  <data name="PhoneTypeEnumNotCorrect" xml:space="preserve">
+    <value>ტელეფონის ტიპი არ არის სწორი (დასაშვები მნიშვნელობებია : Mobile, Office, Home )</value>
   </data>
 </root>

@@ -1,10 +1,8 @@
 ﻿using FluentValidation;
-using PhysicalPersonsDirectory.Services.Models.Person.Add;
+using PhysicalPersonsDirectory.Common.Enums.PhoneType;
 using PhysicalPersonsDirectory.Common.Resources;
+using PhysicalPersonsDirectory.Services.Models.Person.Add;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
 namespace PhysicalPersonsDirectory.Api.Validators
@@ -93,6 +91,11 @@ namespace PhysicalPersonsDirectory.Api.Validators
                                                     {
                                                         context.AddFailure(RsStrings.PhoneNumberMaxLengthRestrict);
                                                     }
+                                                    
+                                                    if (!Enum.IsDefined(typeof(PhoneType), PersonPhoneModel.PhoneType))
+                                                    {
+                                                        context.AddFailure(RsStrings.PhoneTypeEnumNotCorrect);
+                                                    }                                                    
                                                 }
                                             });
         }

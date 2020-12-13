@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Helpers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PhysicalPersonsDirectory.Common\PhysicalPersonsDirectory.Common.csproj" />
     <ProjectReference Include="..\PhysicalPersonsDirectory.Domain\PhysicalPersonsDirectory.Domain.csproj" />
     <ProjectReference Include="..\PhysicalPersonsDirectory.Services.Models\PhysicalPersonsDirectory.Services.Models.csproj" />

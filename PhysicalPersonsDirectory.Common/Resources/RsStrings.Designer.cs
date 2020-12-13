@@ -61,6 +61,24 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to პიროვნების დამატების დროს მოხდა შეცდომა.
+        /// </summary>
+        public static string AddPersonException {
+            get {
+                return ResourceManager.GetString("AddPersonException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ოპერაცია წარმატებით შესრულდ.
+        /// </summary>
+        public static string OperationCompleted {
+            get {
+                return ResourceManager.GetString("OperationCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to პირადი ნომერი სავალდებულო ველია.
         /// </summary>
         public static string PersonalNumberIsRequred {
@@ -192,6 +210,15 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         public static string PhoneNumberMinLengthRestrict {
             get {
                 return ResourceManager.GetString("PhoneNumberMinLengthRestrict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ტელეფონის ტიპი არ არის სწორი (დასაშვები მნიშვნელობებია : Mobile, Office, Home ).
+        /// </summary>
+        public static string PhoneTypeEnumNotCorrect {
+            get {
+                return ResourceManager.GetString("PhoneTypeEnumNotCorrect", resourceCulture);
             }
         }
     }

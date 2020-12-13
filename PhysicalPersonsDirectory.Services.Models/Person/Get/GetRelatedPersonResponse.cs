@@ -1,10 +1,11 @@
-﻿using System;
+﻿using PhysicalPersonsDirectory.Services.Models.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace PhysicalPersonsDirectory.Services.Models.Person.Get
 {
-    public class GetRelatedPersonResponse
+    public class GetRelatedPersonResponse : ResponseBaseModel
     {
 
     }
