@@ -176,5 +176,23 @@ namespace PhysicalPersonsDirectory.Common.Resources {
                 return ResourceManager.GetString("PersonLnameRestrict", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ტელეფონი უნდა შეიცავდეს მაქსიმუმ 50 -სიმბოლოს.
+        /// </summary>
+        public static string PhoneNumberMaxLengthRestrict {
+            get {
+                return ResourceManager.GetString("PhoneNumberMaxLengthRestrict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ტელეფონი უნდა შეიცავდეს მინიმუმ 4 -სიმბოლოს.
+        /// </summary>
+        public static string PhoneNumberMinLengthRestrict {
+            get {
+                return ResourceManager.GetString("PhoneNumberMinLengthRestrict", resourceCulture);
+            }
+        }
     }
 }

@@ -156,4 +156,10 @@
   <data name="PersonLnameRestrict" xml:space="preserve">
     <value>გვარი უნდა შეიცავდეს მხოლოდ ქართული ან ლათინური ანბანის ასოებს</value>
   </data>
+  <data name="PhoneNumberMaxLengthRestrict" xml:space="preserve">
+    <value>ტელეფონი უნდა შეიცავდეს მაქსიმუმ 50 -სიმბოლოს</value>
+  </data>
+  <data name="PhoneNumberMinLengthRestrict" xml:space="preserve">
+    <value>ტელეფონი უნდა შეიცავდეს მინიმუმ 4 -სიმბოლოს</value>
+  </data>
 </root>

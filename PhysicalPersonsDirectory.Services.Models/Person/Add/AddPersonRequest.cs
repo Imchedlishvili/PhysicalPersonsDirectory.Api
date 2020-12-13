@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PhysicalPersonsDirectory.Services.Models.Person.Add
 {
-    public class AddPersonRequest : PersonDetailsBaseModel
+    public class AddPersonRequest : PersonDetailsModel
     {
         
     }

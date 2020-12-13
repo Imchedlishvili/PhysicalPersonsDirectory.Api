@@ -74,7 +74,27 @@ namespace PhysicalPersonsDirectory.Api.Validators
 
                                          return true;
                                      }).WithMessage(RsStrings.PersonBirthDateAgeRestrict);
-        
+
+            RuleForEach(t => t.PersonPhones).Custom((PersonPhoneModel, context) =>
+                                            {
+                                                if (string.IsNullOrEmpty(PersonPhoneModel.PhoneNumber))
+                                                {
+                                                    context.AddFailure(RsStrings.PhoneNumberMinLengthRestrict);
+                                                }
+                                                else
+                                                {
+                                                    var phoneNumberLength = PersonPhoneModel.PhoneNumber.Length;
+                                                    if (phoneNumberLength < 4)
+                                                    {
+                                                        context.AddFailure(RsStrings.PhoneNumberMinLengthRestrict);
+                                                    }
+
+                                                    if (phoneNumberLength > 50)
+                                                    {
+                                                        context.AddFailure(RsStrings.PhoneNumberMaxLengthRestrict);
+                                                    }
+                                                }
+                                            });
         }
     }
 }
