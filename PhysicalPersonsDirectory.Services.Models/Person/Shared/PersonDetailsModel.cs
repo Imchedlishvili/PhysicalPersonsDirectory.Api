@@ -6,7 +6,7 @@ namespace PhysicalPersonsDirectory.Services.Models.Person.Shared
 {
     public class PersonDetailsModel 
     {
-        public int PersonId { get; set; }
+        public int? PersonId { get; set; }
         public string Fname { get; set; }
         public string Lname { get; set; }
 

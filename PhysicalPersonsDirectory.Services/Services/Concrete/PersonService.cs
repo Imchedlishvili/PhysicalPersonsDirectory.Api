@@ -1,4 +1,5 @@
-﻿using PhysicalPersonsDirectory.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using PhysicalPersonsDirectory.Domain;
 using PhysicalPersonsDirectory.Domain.DomainClasses;
 using PhysicalPersonsDirectory.Services.Models.Person.Add;
 using PhysicalPersonsDirectory.Services.Models.Person.Delete;
@@ -26,7 +27,7 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
         public AddPersonResponse AddPerson(AddPersonRequest request)
         {
             try
-            {                
+            {
                 var person = new Person()
                 {
                     Fname = request.Fname,
@@ -54,6 +55,68 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
         {
             try
             {
+                var person = _db.Persons.Where(t => t.Id == request.PersonId.GetValueOrDefault()).Include(t => t.PersonPhones).FirstOrDefault();
+
+                person.Fname = request.Fname;
+                person.Lname = request.Lname;
+                person.PersonalNumber = request.PersonalNumber;
+                person.BirthDate = request.BirthDate;
+                person.GenderId = request.GenderId;
+                person.CityId = request.CityId;
+
+                if (request.PersonPhones == null || request.PersonPhones.Count == 0)
+                {
+                    if (person.PersonPhones != null)
+                    {
+                        person.PersonPhones = null;
+                        //_db.PersonPhones.RemoveRange(person.PersonPhones.ToList());
+                    }
+                }
+                else
+                {
+                    var personPhones = person.PersonPhones.ToList();
+                    if (personPhones == null)
+                    {
+                        var newPhones = request.PersonPhones.Select(t => new PersonPhone
+                        {
+                            PhoneNumber = t.PhoneNumber,
+                            PhoneTypeId = (int)Enum.Parse(typeof(PhoneType), t.PhoneType)
+                        }).ToList();
+
+                        _db.PersonPhones.AddRange(newPhones);
+                    }
+                    else
+                    {
+                        var newPhones = (from t in request.PersonPhones
+                                         where t.Id == null
+                                         select new PersonPhone
+                                         {
+                                             PhoneNumber = t.PhoneNumber,
+                                             PhoneTypeId = (int)Enum.Parse(typeof(PhoneType), t.PhoneType)
+                                         }).ToList();
+
+                        var phoneIds = request.PersonPhones.Where(t => t.Id != null).Select(t => t.Id).ToList();
+                        var removedPhones = personPhones.Where(t => !phoneIds.Contains(t.Id)).ToList();
+
+                        var personPhoneIds = personPhones.Select(t => t.Id).ToList();
+                        var editedPhones = (from t in request.PersonPhones
+                                            where t.Id != null
+                                               && personPhoneIds.Contains(t.Id.Value)
+                                            select new PersonPhone
+                                            {
+                                                Id = t.Id.Value,
+                                                PhoneNumber = t.PhoneNumber
+                                            }).ToList();
+
+
+                        foreach (var item in request.PersonPhones)
+                        {
+                            var personPhone = personPhones.Where(t => t.Id == item.Id).FirstOrDefault();
+                            personPhone.PhoneNumber = item.PhoneNumber;
+                        }
+
+                    }
+                }
 
                 return Success(new EditPersonResponse());
             }
