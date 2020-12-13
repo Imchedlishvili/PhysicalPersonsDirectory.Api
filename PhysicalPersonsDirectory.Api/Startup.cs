@@ -32,8 +32,8 @@ namespace PhysicalPersonsDirectory.Api
             services.AddControllers();
 
             services.AddMvc(options => { options.Filters.Add<ValidationFilter>(); })
-                   .AddFluentValidation(t => t.RegisterValidatorsFromAssemblyContaining<Startup>())
-                   .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                    .AddFluentValidation(t => t.RegisterValidatorsFromAssemblyContaining<Startup>())
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddDbContext<PhysicalPersonsContext>(opt => opt.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"], x => x.UseNetTopologySuite()), ServiceLifetime.Transient);
 
