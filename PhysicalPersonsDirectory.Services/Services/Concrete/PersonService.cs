@@ -275,6 +275,12 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
                                        .Where(t => t.Id == request.PersonId)
                                        .FirstOrDefault();
 
+                var relatedPersonIds = personDetails.RelatedPersons.Select(t => t.RelatedPersonId).ToList();
+                var relatedPersonDetails = _db.Persons.AsNoTracking()
+                                              .Include(p => p.PersonPhones).AsNoTracking()
+                                              .Where(t => relatedPersonIds.Contains(personDetails.Id))
+                                              .ToList();
+
                 var result = new PersonDetailsBaseModel
                 {
                     PersonId = personDetails.Id,
@@ -292,10 +298,30 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
                         PersonId = p.PersonId,
                         PhoneNumber = p.PhoneNumber,
                         PhoneType = ((PhoneType)p.PhoneTypeId).ToString()
+                    }).ToList(),
+
+                    RelatedPersons = relatedPersonDetails.Select(t => new PersonDetailsBaseModel
+                    {
+                        PersonId = t.Id,
+                        Fname = t.Fname,
+                        Lname = t.Lname,
+                        PersonalNumber = t.PersonalNumber,
+                        BirthDate = t.BirthDate,
+                        GenderId = t.GenderId,
+                        CityId = t.CityId,
+                        Image = !string.IsNullOrEmpty(t.ImagePatch) ? File.ReadAllBytes(t.ImagePatch) : null, //new byte[] { },
+
+                        PersonPhones = t.PersonPhones.Select(p => new PersonPhoneModel
+                        {
+                            Id = p.Id,
+                            PersonId = p.PersonId,
+                            PhoneNumber = p.PhoneNumber,
+                            PhoneType = ((PhoneType)p.PhoneTypeId).ToString()
+                        }).ToList()
                     }).ToList()
                 };
 
-                return Success(new GetPersonDetailsResponse());
+                return Success(new GetPersonDetailsResponse() { PersonDetails = result });
             }
             catch (Exception ex)
             {
