@@ -248,6 +248,14 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
         {
             try
             {
+                var relatedItem = _db.RelatedPersons.Where(t => t.Id == request.Id).FirstOrDefault();
+                if (relatedItem == null)
+                {
+                    return Fail(new DeleteRelatedPersonResponse(), RsStrings.DeleteRelatedPersonNotFound);
+                }
+
+                _db.RelatedPersons.Remove(relatedItem);
+                _db.SaveChanges();
 
                 return Success(new DeleteRelatedPersonResponse());
             }
@@ -261,6 +269,31 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
         {
             try
             {
+                var personDetails = _db.Persons.AsNoTracking()
+                                       .Include(p => p.PersonPhones).AsNoTracking()
+                                       .Include(rp => rp.RelatedPersons).AsNoTracking()
+                                       .Where(t => t.Id == request.PersonId)
+                                       .FirstOrDefault();
+
+                var result = new PersonDetailsBaseModel
+                {
+                    PersonId = personDetails.Id,
+                    Fname = personDetails.Fname,
+                    Lname = personDetails.Lname,
+                    PersonalNumber = personDetails.PersonalNumber,
+                    BirthDate = personDetails.BirthDate,
+                    GenderId = personDetails.GenderId,
+                    CityId = personDetails.CityId,
+                    Image = !string.IsNullOrEmpty(personDetails.ImagePatch) ? File.ReadAllBytes(personDetails.ImagePatch) : null, //new byte[] { },
+
+                    PersonPhones = personDetails.PersonPhones.Select(p => new PersonPhoneModel
+                    {
+                        Id = p.Id,
+                        PersonId = p.PersonId,
+                        PhoneNumber = p.PhoneNumber,
+                        PhoneType = ((PhoneType)p.PhoneTypeId).ToString()
+                    }).ToList()
+                };
 
                 return Success(new GetPersonDetailsResponse());
             }

@@ -88,6 +88,15 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to წასაშლელი კავშირი ფიზიკურ პირებს შორის ვერ მოიძებნა.
+        /// </summary>
+        public static string DeleteRelatedPersonNotFound {
+            get {
+                return ResourceManager.GetString("DeleteRelatedPersonNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to პიროვნების ცვლილების დროს მოხდა გაუთვალისწინებელი შეცდომა.
         /// </summary>
         public static string EditPersonUnexpectedException {

@@ -12,10 +12,9 @@ namespace PhysicalPersonsDirectory.Services.Models.Person.Shared
 
         public string PersonalNumber { get; set; }
         public DateTime BirthDate { get; set; }
+        public byte[] Image { get; set; }
 
         public int GenderId { get; set; }
-        public int CityId { get; set; }
-
-        public List<PersonPhoneModel> PersonPhones { get; set; }        
+        public int CityId { get; set; }            
     }
 }
