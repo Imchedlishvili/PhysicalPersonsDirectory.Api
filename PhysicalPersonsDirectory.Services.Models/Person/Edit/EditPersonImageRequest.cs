@@ -1,6 +1,8 @@
-﻿namespace PhysicalPersonsDirectory.Services.Models.Person.Edit
+﻿using PhysicalPersonsDirectory.Services.Models.Person.Shared;
+
+namespace PhysicalPersonsDirectory.Services.Models.Person.Edit
 {
-    public class EditPersonImageRequest
+    public class EditPersonImageRequest : PersonImageRequestModel
     {
 
     }
