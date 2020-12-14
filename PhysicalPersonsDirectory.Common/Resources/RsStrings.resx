@@ -141,6 +141,9 @@
   <data name="PersonalNumberRestrict" xml:space="preserve">
     <value>პირადი ნომერი უნდა შეიცავდეს მხოლოდ ციფრებს</value>
   </data>
+  <data name="PersonAndRelatedPersonNotFound" xml:space="preserve">
+    <value>ფიზიკური პირი და მასთან დასაკავშირებელი ფიზიკური პირ ვერ მოძებნა</value>
+  </data>
   <data name="PersonBirthDateAgeRestrict" xml:space="preserve">
     <value>პიროვნება მინიმუმ 18 წლის უნდა იყოს</value>
   </data>
@@ -171,6 +174,9 @@
   <data name="PersonLnameRestrict" xml:space="preserve">
     <value>გვარი უნდა შეიცავდეს მხოლოდ ქართული ან ლათინური ანბანის ასოებს</value>
   </data>
+  <data name="PersonNotFound" xml:space="preserve">
+    <value>ფიზიკური პირი ვერ მოიძებნა</value>
+  </data>
   <data name="PhoneNumberMaxLengthRestrict" xml:space="preserve">
     <value>ტელეფონი უნდა შეიცავდეს მაქსიმუმ 50 -სიმბოლოს</value>
   </data>
@@ -179,5 +185,8 @@
   </data>
   <data name="PhoneTypeEnumNotCorrect" xml:space="preserve">
     <value>ტელეფონის ტიპი არ არის სწორი (დასაშვები მნიშვნელობებია : Mobile, Office, Home )</value>
+  </data>
+  <data name="RelatedPersonNotFound" xml:space="preserve">
+    <value>დასაკავშირებელი ფიზიკური პირი ვერ მოძებნა</value>
   </data>
 </root>

@@ -133,6 +133,15 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ფიზიკური პირი და მასთან დასაკავშირებელი ფიზიკური პირ ვერ მოძებნა.
+        /// </summary>
+        public static string PersonAndRelatedPersonNotFound {
+            get {
+                return ResourceManager.GetString("PersonAndRelatedPersonNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to პიროვნება მინიმუმ 18 წლის უნდა იყოს.
         /// </summary>
         public static string PersonBirthDateAgeRestrict {
@@ -223,6 +232,15 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ფიზიკური პირი ვერ მოიძებნა.
+        /// </summary>
+        public static string PersonNotFound {
+            get {
+                return ResourceManager.GetString("PersonNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ტელეფონი უნდა შეიცავდეს მაქსიმუმ 50 -სიმბოლოს.
         /// </summary>
         public static string PhoneNumberMaxLengthRestrict {
@@ -246,6 +264,15 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         public static string PhoneTypeEnumNotCorrect {
             get {
                 return ResourceManager.GetString("PhoneTypeEnumNotCorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to დასაკავშირებელი ფიზიკური პირი ვერ მოძებნა.
+        /// </summary>
+        public static string RelatedPersonNotFound {
+            get {
+                return ResourceManager.GetString("RelatedPersonNotFound", resourceCulture);
             }
         }
     }

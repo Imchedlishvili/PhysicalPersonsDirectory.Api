@@ -162,7 +162,11 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
             try
             {
                 var relatedPersons = _db.RelatedPersons.Where(t => t.PersonId == request.PersonId || t.RelatedPersonId == request.PersonId).ToList();
-                if (relatedPersons != null && relatedPersons.Count > 0)
+                if (relatedPersons.Count == 0)
+                {
+                    return Fail(new DeletePersonResponse(), RsStrings.PersonNotFound);
+                }
+                else
                 {
                     _db.RelatedPersons.RemoveRange(relatedPersons);
                     _db.SaveChanges();
@@ -206,6 +210,22 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
         {
             try
             {
+                var persons = _db.Persons.AsNoTracking().Where(t => t.Id == request.PersonId || t.Id == request.RelatedPersonId).ToList();
+                if (persons.Count == 0)
+                {
+                    return Fail(new AddRelatedPersonResponse(), RsStrings.PersonAndRelatedPersonNotFound);
+                }
+
+                if (!persons.Where(t => t.Id == request.PersonId).Any())
+                {
+                    return Fail(new AddRelatedPersonResponse(), RsStrings.PersonNotFound);
+                }
+
+                if (!persons.Where(t => t.Id == request.RelatedPersonId).Any())
+                {
+                    return Fail(new AddRelatedPersonResponse(), RsStrings.RelatedPersonNotFound);
+                }
+
                 var relatedPerson = new RelatedPerson
                 {
                     PersonId = request.PersonId,
