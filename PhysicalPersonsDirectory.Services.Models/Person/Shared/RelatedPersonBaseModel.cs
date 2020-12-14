@@ -4,6 +4,6 @@
     {
         public int PersonId { get; set; }
         public int RelatedPersonId { get; set; }
-        public int RelationTypeId { get; set; }
+        public string RelationType { get; set; }
     }
 }

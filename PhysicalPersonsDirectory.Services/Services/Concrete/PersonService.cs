@@ -27,6 +27,7 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
             _db = db;
         }
 
+        #region --  private methods --
 
         private PersonImageResponseModel saveImage(PersonImageRequestModel personImage)
         {
@@ -54,6 +55,8 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
 
             return Success(new PersonImageResponseModel() { ImagePatch = "" });
         }
+
+        #endregion
 
 
         public AddPersonResponse AddPerson(AddPersonRequest request)
@@ -158,12 +161,18 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
         {
             try
             {
+                var relatedPersons = _db.RelatedPersons.Where(t => t.PersonId == request.PersonId || t.RelatedPersonId == request.PersonId).ToList();
+                if (relatedPersons != null && relatedPersons.Count > 0)
+                {
+                    _db.RelatedPersons.RemoveRange(relatedPersons);
+                    _db.SaveChanges();
+                }
 
                 return Success(new DeletePersonResponse());
             }
             catch (Exception ex)
             {
-                return Error(new DeletePersonResponse(), "Unexpected error occured.");
+                return Error(new DeletePersonResponse(), RsStrings.DeletePersonUnexpectedException);
             }
         }
 
@@ -197,12 +206,21 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
         {
             try
             {
+                var relatedPerson = new RelatedPerson
+                {
+                    PersonId = request.PersonId,
+                    RelatedPersonId = request.RelatedPersonId,
+                    RelationTypeId = (int)Enum.Parse(typeof(RelationType), request.RelationType)
+                };
+
+                _db.RelatedPersons.Add(relatedPerson);
+                _db.SaveChanges();
 
                 return Success(new AddRelatedPersonResponse());
             }
             catch (Exception ex)
             {
-                return Error(new AddRelatedPersonResponse(), "Unexpected error occured.");
+                return Error(new AddRelatedPersonResponse(), RsStrings.AddRelatedPersonUnexpectedException);
             }
         }
 

@@ -120,6 +120,12 @@
   <data name="AddPersonUnexpectedException" xml:space="preserve">
     <value>პიროვნების დამატების დროს მოხდა გაუთვალისწინებელი შეცდომა</value>
   </data>
+  <data name="AddRelatedPersonUnexpectedException" xml:space="preserve">
+    <value>დაკავშირებული პიროვნების დამატების დროს მოხდა გაუთვალისწინებელი შეცდომა</value>
+  </data>
+  <data name="DeletePersonUnexpectedException" xml:space="preserve">
+    <value>პიროვნების წაშლის დროს მოხდა გაუთვალისწინებელი შეცდომა</value>
+  </data>
   <data name="EditPersonUnexpectedException" xml:space="preserve">
     <value>პიროვნების ცვლილების დროს მოხდა გაუთვალისწინებელი შეცდომა</value>
   </data>

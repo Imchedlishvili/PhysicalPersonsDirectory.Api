@@ -70,6 +70,24 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to დაკავშირებული პიროვნების დამატების დროს მოხდა გაუთვალისწინებელი შეცდომა.
+        /// </summary>
+        public static string AddRelatedPersonUnexpectedException {
+            get {
+                return ResourceManager.GetString("AddRelatedPersonUnexpectedException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to პიროვნების წაშლის დროს მოხდა გაუთვალისწინებელი შეცდომა.
+        /// </summary>
+        public static string DeletePersonUnexpectedException {
+            get {
+                return ResourceManager.GetString("DeletePersonUnexpectedException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to პიროვნების ცვლილების დროს მოხდა გაუთვალისწინებელი შეცდომა.
         /// </summary>
         public static string EditPersonUnexpectedException {
