@@ -54,11 +54,13 @@ namespace PhysicalPersonsDirectory.Domain
 
                 entity.HasOne<Gender>(g => g.Gender)
                       .WithMany(p => p.Persons)
-                      .HasForeignKey(g => g.GenderId);
+                      .HasForeignKey(g => g.GenderId)
+                      .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne<City>(c => c.City)
                       .WithMany(p => p.Persons)
-                      .HasForeignKey(c => c.CityId);
+                      .HasForeignKey(c => c.CityId)
+                      .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasIndex(e => e.CityId, "IX_Persons_CityId");
                 entity.HasIndex(e => e.GenderId, "IX_Persons_GenderId");
@@ -75,7 +77,8 @@ namespace PhysicalPersonsDirectory.Domain
 
                 entity.HasOne<PhoneType>(pt => pt.PhoneType)
                       .WithMany(pp => pp.PersonPhones)
-                      .HasForeignKey(pt => pt.PhoneTypeId);
+                      .HasForeignKey(pt => pt.PhoneTypeId)
+                      .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne<Person>(p => p.Person)
                       .WithMany(pp => pp.PersonPhones)
@@ -103,7 +106,8 @@ namespace PhysicalPersonsDirectory.Domain
 
                 entity.HasOne<RelationType>(rt => rt.RelationType)
                      .WithMany(rp => rp.RelatedPersons)
-                     .HasForeignKey(rp => rp.RelationTypeId);
+                     .HasForeignKey(rp => rp.RelationTypeId)
+                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasIndex(e => e.RelatedPersonId, "IX_RelatedPersons_RelatedPersonId");
                 entity.HasIndex(e => e.RelationTypeId, "IX_RelatedPersons_RelationTypeId");
