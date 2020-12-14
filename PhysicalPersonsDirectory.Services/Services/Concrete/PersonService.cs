@@ -86,7 +86,7 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
         {
             try
             {
-                var person = _db.Persons.Where(t => t.Id == request.PersonId.GetValueOrDefault()).Include(t => t.PersonPhones).FirstOrDefault();
+                var person = _db.Persons.Where(t => t.Id == request.PersonId).Include(t => t.PersonPhones).FirstOrDefault();
 
                 person.Fname = request.Fname;
                 person.Lname = request.Lname;

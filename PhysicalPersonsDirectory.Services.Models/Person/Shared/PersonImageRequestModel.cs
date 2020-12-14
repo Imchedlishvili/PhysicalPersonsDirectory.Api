@@ -7,7 +7,7 @@ namespace PhysicalPersonsDirectory.Services.Models.Person.Shared
 {
     public class PersonImageRequestModel
     {
-        public int? PersonId { get; set; }
+        public int PersonId { get; set; }
         public byte[] Image { get; set; }
         public IFormFile ImageTest { get; set; }
     }

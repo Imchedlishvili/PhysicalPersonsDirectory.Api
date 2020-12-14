@@ -6,7 +6,7 @@ namespace PhysicalPersonsDirectory.Services.Models.Person.Shared
 {
     public class PersonBaseModel
     {
-        public int? PersonId { get; set; }
+        public int PersonId { get; set; }
         public string Fname { get; set; }
         public string Lname { get; set; }
 
@@ -16,6 +16,6 @@ namespace PhysicalPersonsDirectory.Services.Models.Person.Shared
         public int GenderId { get; set; }
         public int CityId { get; set; }
 
-        public List<PersonPhoneModel> PersonPhones { get; set; }
+        public List<PersonPhoneModel> PersonPhones { get; set; }        
     }
 }

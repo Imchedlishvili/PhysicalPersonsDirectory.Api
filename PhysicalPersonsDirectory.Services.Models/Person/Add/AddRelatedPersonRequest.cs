@@ -1,6 +1,8 @@
-﻿namespace PhysicalPersonsDirectory.Services.Models.Person.Add
+﻿using PhysicalPersonsDirectory.Services.Models.Person.Shared;
+
+namespace PhysicalPersonsDirectory.Services.Models.Person.Add
 {
-    public class AddRelatedPersonRequest
+    public class AddRelatedPersonRequest : RelatedPersonBaseModel
     {
 
     }

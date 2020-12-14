@@ -4,8 +4,8 @@ using System.Text;
 
 namespace PhysicalPersonsDirectory.Services.Models.Person.Shared
 {
-    public class RelatedPersonModel : RelatedPersonBaseModel
+    public class PersonDetailsBaseModel : PersonBaseModel
     {
-        public int Id { get; set; }
+        public List<RelatedPersonModel> RelatedPersons { get; set; }
     }
 }

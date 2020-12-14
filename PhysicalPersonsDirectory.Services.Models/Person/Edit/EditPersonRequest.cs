@@ -6,7 +6,7 @@ namespace PhysicalPersonsDirectory.Services.Models.Person.Edit
 {
     public class EditPersonRequest 
     {
-        public int? PersonId { get; set; }
+        public int PersonId { get; set; }
         public string Fname { get; set; }
         public string Lname { get; set; }
         public string PersonalNumber { get; set; }

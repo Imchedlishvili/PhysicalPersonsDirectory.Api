@@ -6,6 +6,6 @@ namespace PhysicalPersonsDirectory.Services.Models.Person.Get
 {
     public class GetPersonDetailsRequest
     {
-
+        public int PersonId { get; set; }
     }
 }
