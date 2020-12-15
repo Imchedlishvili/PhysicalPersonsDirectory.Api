@@ -106,6 +106,33 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ფიზიკური პირის დეტალური ინფორმაციის მიღებოს დროს მოხდა გაუთვალისწინებელი შეცდომა.
+        /// </summary>
+        public static string GetPersonDetailsUnexpectedException {
+            get {
+                return ResourceManager.GetString("GetPersonDetailsUnexpectedException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ფიზიკური პირების სიის მიღებოს დროს მოხდა გაუთვალისწინებელი შეცდომა.
+        /// </summary>
+        public static string GetPersonsUnexpectedException {
+            get {
+                return ResourceManager.GetString("GetPersonsUnexpectedException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ფიზიკური პირების და მათთან დაკავშირებული ფიზიკური პირების სიის მიღებოს დროს მოხდა გაუთვალისწინებელი შეცდომა.
+        /// </summary>
+        public static string GetRelatedPersonsUnexpectedException {
+            get {
+                return ResourceManager.GetString("GetRelatedPersonsUnexpectedException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ოპერაცია წარმატებით შესრულდ.
         /// </summary>
         public static string OperationCompleted {

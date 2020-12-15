@@ -132,6 +132,15 @@
   <data name="EditPersonUnexpectedException" xml:space="preserve">
     <value>პიროვნების ცვლილების დროს მოხდა გაუთვალისწინებელი შეცდომა</value>
   </data>
+  <data name="GetPersonDetailsUnexpectedException" xml:space="preserve">
+    <value>ფიზიკური პირის დეტალური ინფორმაციის მიღებოს დროს მოხდა გაუთვალისწინებელი შეცდომა</value>
+  </data>
+  <data name="GetPersonsUnexpectedException" xml:space="preserve">
+    <value>ფიზიკური პირების სიის მიღებოს დროს მოხდა გაუთვალისწინებელი შეცდომა</value>
+  </data>
+  <data name="GetRelatedPersonsUnexpectedException" xml:space="preserve">
+    <value>ფიზიკური პირების და მათთან დაკავშირებული ფიზიკური პირების სიის მიღებოს დროს მოხდა გაუთვალისწინებელი შეცდომა</value>
+  </data>
   <data name="OperationCompleted" xml:space="preserve">
     <value>ოპერაცია წარმატებით შესრულდ</value>
   </data>

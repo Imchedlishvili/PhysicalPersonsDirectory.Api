@@ -1,21 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PhysicalPersonsDirectory.Common.Resources;
 using PhysicalPersonsDirectory.Domain;
 using PhysicalPersonsDirectory.Domain.DomainClasses;
+using PhysicalPersonsDirectory.Services.Models.Paging;
 using PhysicalPersonsDirectory.Services.Models.Person.Add;
 using PhysicalPersonsDirectory.Services.Models.Person.Delete;
 using PhysicalPersonsDirectory.Services.Models.Person.Edit;
 using PhysicalPersonsDirectory.Services.Models.Person.Get;
+using PhysicalPersonsDirectory.Services.Models.Person.Shared;
 using PhysicalPersonsDirectory.Services.Services.Abstract;
 using System;
-using System.Linq;
-using System.Collections.Generic;
-using static PhysicalPersonsDirectory.Services.Services.Helpers.ServiceResponse;
-using PhysicalPersonsDirectory.Common.Resources;
-using PhoneType = PhysicalPersonsDirectory.Common.Enums.PhoneType.PhoneType;
 using System.IO;
+using System.Linq;
 using System.Reflection;
-using static System.Net.Mime.MediaTypeNames;
-using PhysicalPersonsDirectory.Services.Models.Person.Shared;
+using static PhysicalPersonsDirectory.Services.Services.Helpers.ServiceResponse;
+using PhoneType = PhysicalPersonsDirectory.Common.Enums.PhoneType.PhoneType;
+using static PhysicalPersonsDirectory.Services.Services.Helpers.Paging;
 
 namespace PhysicalPersonsDirectory.Services.Services.Concrete
 {
@@ -325,7 +325,7 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
             }
             catch (Exception ex)
             {
-                return Error(new GetPersonDetailsResponse(), "Unexpected error occured.");
+                return Error(new GetPersonDetailsResponse(), RsStrings.GetPersonDetailsUnexpectedException);
             }
         }
 
@@ -333,12 +333,58 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
         {
             try
             {
+                if (request.PagingModel == null)
+                {
+                    request.PagingModel = new PagingBaseRequestModel() { Sorting = new SortingModel { SortBy = "CreateDate" } };
+                }
 
-                return Success(new GetPersonResponse());
+                var phoneQuery = (from t in _db.PersonPhones.AsNoTracking() select t);
+                var personsQuery = (from p in _db.Persons.AsNoTracking()
+                                    join g in _db.Genders.AsNoTracking() on p.GenderId equals g.Id
+                                    join c in _db.Citys.AsNoTracking() on p.CityId equals c.Id
+                                    where (request.Fname == null || p.Fname.Contains(request.Fname))
+                                       && (request.Lname == null || p.Lname.Contains(request.Lname))
+                                       && (request.PersonalNumber == null || p.PersonalNumber.Contains(request.PersonalNumber))
+                                       && (request.BirthDateFrom == null || p.BirthDate >= request.BirthDateFrom)
+                                       && (request.BirthDateTo == null || p.BirthDate <= request.BirthDateFrom)
+                                       && (request.GenderId == null || p.GenderId == request.GenderId)
+                                       && (request.CityId == null || p.CityId == request.CityId)
+                                       && (request.PhoneNumber == null || phoneQuery.Where(pp => pp.PersonId == p.Id && pp.PhoneNumber.Contains(request.PhoneNumber)).Any())
+                                    select new PersonBaseModel
+                                    {
+                                        PersonId = p.Id,
+                                        Fname = p.Fname,
+                                        Lname = p.Lname,
+                                        PersonalNumber = p.PersonalNumber,
+                                        BirthDate = p.BirthDate,
+                                        GenderId = p.GenderId,
+                                        Gender = g.GenderName,
+                                        CityId = p.CityId,
+                                        City = c.CityName
+                                    });
+
+                var persons = PaginatedList(personsQuery, request.PagingModel);
+                var personIds = persons.Select(t => t.PersonId).ToList();
+                var personPhones = phoneQuery.Where(t => personIds.Contains(t.PersonId)).ToList();
+
+                foreach (var item in persons)
+                {
+                    item.PersonalNumber = personPhones.Where(t => t.PersonId == item.PersonId).Select(t => t.PhoneNumber).FirstOrDefault();
+                }
+
+                var result = new GetPersonResponse
+                {
+                    Persons = persons,
+                    TotalCount = personsQuery.Count(),
+                    CurrentElementStart = request.PagingModel.Paging.Offset,
+                    CurrentElementEnd = request.PagingModel.Paging.Offset + request.PagingModel.Paging.Limit
+                };
+
+                return Success(result);
             }
             catch (Exception ex)
             {
-                return Error(new GetPersonResponse(), "Unexpected error occured.");
+                return Error(new GetPersonResponse(), RsStrings.GetPersonsUnexpectedException);
             }
         }
 
@@ -346,12 +392,29 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
         {
             try
             {
+                var phoneQuery = (from t in _db.PersonPhones.AsNoTracking() select t);
+                var personsQuery = (from p in _db.Persons.AsNoTracking()
+                                    join g in _db.Genders.AsNoTracking() on p.GenderId equals g.Id
+                                    join c in _db.Citys.AsNoTracking() on p.CityId equals c.Id
+                                    select new PersonBaseModel
+                                    {
+                                        PersonId = p.Id,
+                                        Fname = p.Fname,
+                                        Lname = p.Lname,
+                                        PersonalNumber = p.PersonalNumber,
+                                        BirthDate = p.BirthDate,
+                                        GenderId = p.GenderId,
+                                        Gender = g.GenderName,
+                                        CityId = p.CityId,
+                                        City = c.CityName
+                                    });
+
 
                 return Success(new GetRelatedPersonResponse());
             }
             catch (Exception ex)
             {
-                return Error(new GetRelatedPersonResponse(), "Unexpected error occured.");
+                return Error(new GetRelatedPersonResponse(), RsStrings.GetRelatedPersonsUnexpectedException);
             }
         }
     }
