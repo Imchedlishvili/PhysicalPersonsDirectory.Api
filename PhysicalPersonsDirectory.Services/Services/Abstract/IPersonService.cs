@@ -16,6 +16,6 @@ namespace PhysicalPersonsDirectory.Services.Services.Abstract
         DeleteRelatedPersonResponse DeleteRelatedPerson(DeleteRelatedPersonRequest request);
         GetPersonDetailsResponse GetPersonDetails(GetPersonDetailsRequest request);
         GetPersonResponse GetPersons(GetPersonRequest request);
-        GetRelatedPersonResponse GetRelatedPersons(GetRelatedPersonRequest request);
+        GetRelatedPersonResponse GetRelatedPersons();
     }
 }

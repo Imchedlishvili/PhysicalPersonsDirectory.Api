@@ -16,6 +16,7 @@ using System.Reflection;
 using static PhysicalPersonsDirectory.Services.Services.Helpers.ServiceResponse;
 using PhoneType = PhysicalPersonsDirectory.Common.Enums.PhoneType.PhoneType;
 using static PhysicalPersonsDirectory.Services.Services.Helpers.Paging;
+using System.Collections.Generic;
 
 namespace PhysicalPersonsDirectory.Services.Services.Concrete
 {
@@ -155,7 +156,7 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
             {
                 return Error(new EditPersonResponse(), RsStrings.EditPersonUnexpectedException);
             }
-        }
+        } 
 
         public DeletePersonResponse DeletePerson(DeletePersonRequest request)
         {
@@ -388,51 +389,45 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
             }
         }
 
-        public GetRelatedPersonResponse GetPersonsRelatedPersons(GetRelatedPersonRequest request)
+        public GetRelatedPersonResponse GetRelatedPersons()
         {
             try
-            {                
-                var personsQuery = (from p in _db.Persons.AsNoTracking()
-                                    join g in _db.Genders.AsNoTracking() on p.GenderId equals g.Id
-                                    join c in _db.Citys.AsNoTracking() on p.CityId equals c.Id
-                                    select new PersonModel
-                                    {
-                                        PersonId = p.Id,
-                                        ParentId = (int?)null,
-                                        Fname = p.Fname,
-                                        Lname = p.Lname,
-                                        BirthDate = p.BirthDate,
-                                        GenderId = p.GenderId,
-                                        Gender = g.GenderName,
-                                        CityId = p.CityId,
-                                        City = c.CityName
-                                    });
+            {
+                var relatedPersons = (from p in _db.Persons.AsNoTracking()
+                                      join g in _db.Genders.AsNoTracking() on p.GenderId equals g.Id
+                                      join c in _db.Citys.AsNoTracking() on p.CityId equals c.Id
+                                      join rp in _db.RelatedPersons.AsNoTracking() on p.Id equals rp.PersonId into rplj
+                                      from rp in rplj.DefaultIfEmpty()
+                                      join rt in _db.RelationTypes.AsNoTracking() on rp.RelationTypeId equals rt.Id
+                                      select new
+                                      {
+                                          PersonId = p.Id,
+                                          Fname = p.Fname,
+                                          Lname = p.Lname,
+                                          BirthDate = p.BirthDate,
+                                          Gender = g.GenderName,
+                                          City = c.CityName,
+                                          rt.RelationTypeName
+                                      }).ToList();
 
-                var relatedPersonsQuery = (from p in _db.Persons.AsNoTracking()
-                                           join g in _db.Genders.AsNoTracking() on p.GenderId equals g.Id
-                                           join c in _db.Citys.AsNoTracking() on p.CityId equals c.Id
-                                           join rp in _db.RelatedPersons.AsNoTracking() on p.Id equals rp.RelatedPersonId
+                var groupRelatedPersons = (from t in relatedPersons
+                                           group t by new { t.PersonId, t.Fname, t.Lname, t.BirthDate, t.Gender, t.City } into g
                                            select new PersonModel
                                            {
-                                               PersonId = p.Id,
-                                               ParentId = rp.PersonId,
-                                               Fname = p.Fname,
-                                               Lname = p.Lname,
-                                               BirthDate = p.BirthDate,
-                                               GenderId = p.GenderId,
-                                               Gender = g.GenderName,
-                                               CityId = p.CityId,
-                                               City = c.CityName
-                                           });
+                                               PersonId = g.Key.PersonId,
+                                               Fname = g.Key.Fname,
+                                               Lname = g.Key.Lname,
+                                               BirthDate = g.Key.BirthDate,
+                                               Gender = g.Key.Gender,
+                                               City = g.Key.City,
+                                               RelatedPersonsByType = g.GroupBy(rt => rt.RelationTypeName).Select(rpt => new RelatedPersonsByTypeModel
+                                               {
+                                                   RelatedPersonCount = rpt.Count(),
+                                                   RelationType = rpt.Key
+                                               }).ToList()
+                                           }).ToList();
 
-                var _persons = (from t in personsQuery.Union(relatedPersonsQuery) select t).ToList();
-                var persons = (from t in _persons where t.ParentId == null select t).ToList();
-                foreach (var item in persons)
-                {
-                    item.RelatedPersons = (from t in _persons where t.ParentId == item.PersonId select t).ToList();
-                }
-
-                return Success(new GetRelatedPersonResponse() { Persons = persons });
+                return Success(new GetRelatedPersonResponse() { RelatedPersons = groupRelatedPersons });
             }
             catch (Exception ex)
             {

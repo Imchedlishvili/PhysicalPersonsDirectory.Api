@@ -100,9 +100,9 @@ namespace PhysicalPersonsDirectory.Api.Controllers
         [HttpGet("relatedpersons")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public ActionResult<GetRelatedPersonResponse> GetRelatedPersons([FromQuery] GetRelatedPersonRequest request)
+        public ActionResult<GetRelatedPersonResponse> GetRelatedPersons()
         {
-            return _personService.GetRelatedPersons(request);
+            return _personService.GetRelatedPersons();
         }
     }
 }

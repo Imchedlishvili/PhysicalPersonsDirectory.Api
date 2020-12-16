@@ -8,6 +8,6 @@ namespace PhysicalPersonsDirectory.Services.Models.Person.Get
 {
     public class GetRelatedPersonResponse : ResponseBaseModel
     {
-        public List<PersonModel> Persons { get; set; }
+        public List<PersonModel> RelatedPersons { get; set; }
     }
 }
