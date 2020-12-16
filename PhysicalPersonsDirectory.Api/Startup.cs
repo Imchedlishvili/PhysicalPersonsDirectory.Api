@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PhysicalPersonsDirectory.Api.CustomExceptionMiddleware;
 using PhysicalPersonsDirectory.Api.Filters;
 using PhysicalPersonsDirectory.Domain;
 using PhysicalPersonsDirectory.Services.Services.Abstract;
@@ -56,6 +57,8 @@ namespace PhysicalPersonsDirectory.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

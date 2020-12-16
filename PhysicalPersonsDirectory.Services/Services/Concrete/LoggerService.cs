@@ -12,7 +12,7 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
         {
             _db = db;
         }
-
+         
         public void LogError(string message)
         {
             try
