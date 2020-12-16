@@ -27,7 +27,7 @@ namespace PhysicalPersonsDirectory.Api.Controllers
             return _personService.AddPerson(request);
         }
 
-        [HttpPost("edit")]
+        [HttpPut("edit")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
@@ -36,7 +36,7 @@ namespace PhysicalPersonsDirectory.Api.Controllers
             return _personService.EditPerson(request);
         }
 
-        [HttpPost("delete")]
+        [HttpDelete("delete")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
@@ -54,7 +54,7 @@ namespace PhysicalPersonsDirectory.Api.Controllers
             return _personService.AddPersonImage(request);
         }
 
-        [HttpPost("editmage")]
+        [HttpPut("editmage")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
@@ -72,7 +72,7 @@ namespace PhysicalPersonsDirectory.Api.Controllers
             return _personService.AddRelatedPerson(request);
         }
 
-        [HttpPost("deleterelatedperson")]
+        [HttpDelete("deleterelatedperson")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]

@@ -156,7 +156,7 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
             {
                 return Error(new EditPersonResponse(), RsStrings.EditPersonUnexpectedException);
             }
-        } 
+        }
 
         public DeletePersonResponse DeletePerson(DeletePersonRequest request)
         {
@@ -279,7 +279,7 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
                 var relatedPersonIds = personDetails.RelatedPersons.Select(t => t.RelatedPersonId).ToList();
                 var relatedPersonDetails = _db.Persons.AsNoTracking()
                                               .Include(p => p.PersonPhones).AsNoTracking()
-                                              .Where(t => relatedPersonIds.Contains(personDetails.Id))
+                                              .Where(t => relatedPersonIds.Contains(t.Id))
                                               .ToList();
 
                 var result = new PersonDetailsBaseModel
@@ -398,7 +398,8 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
                                       join c in _db.Citys.AsNoTracking() on p.CityId equals c.Id
                                       join rp in _db.RelatedPersons.AsNoTracking() on p.Id equals rp.PersonId into rplj
                                       from rp in rplj.DefaultIfEmpty()
-                                      join rt in _db.RelationTypes.AsNoTracking() on rp.RelationTypeId equals rt.Id
+                                      join rt in _db.RelationTypes.AsNoTracking() on rp.RelationTypeId equals rt.Id into rtlj
+                                      from rt in rtlj.DefaultIfEmpty()
                                       select new
                                       {
                                           PersonId = p.Id,
