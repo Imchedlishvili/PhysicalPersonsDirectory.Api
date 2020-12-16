@@ -111,7 +111,7 @@ namespace PhysicalPersonsDirectory.Domain
 
                 entity.HasIndex(e => e.RelatedPersonId, "IX_RelatedPersons_RelatedPersonId");
                 entity.HasIndex(e => e.RelationTypeId, "IX_RelatedPersons_RelationTypeId");
-            });
+            });           
         }
 
         public virtual DbSet<Gender> Genders { get; set; }
@@ -121,5 +121,6 @@ namespace PhysicalPersonsDirectory.Domain
         public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<PersonPhone> PersonPhones { get; set; }
         public virtual DbSet<RelatedPerson> RelatedPersons { get; set; }
+        public virtual DbSet<LogError> LogErrors { get; set; }
     }
 }

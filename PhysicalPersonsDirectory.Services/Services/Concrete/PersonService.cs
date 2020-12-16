@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using PhysicalPersonsDirectory.Common.Resources;
 using PhysicalPersonsDirectory.Domain;
 using PhysicalPersonsDirectory.Domain.DomainClasses;
@@ -10,14 +11,12 @@ using PhysicalPersonsDirectory.Services.Models.Person.Get;
 using PhysicalPersonsDirectory.Services.Models.Person.Shared;
 using PhysicalPersonsDirectory.Services.Services.Abstract;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
+using static PhysicalPersonsDirectory.Services.Services.Helpers.Paging;
 using static PhysicalPersonsDirectory.Services.Services.Helpers.ServiceResponse;
 using PhoneType = PhysicalPersonsDirectory.Common.Enums.PhoneType.PhoneType;
-using static PhysicalPersonsDirectory.Services.Services.Helpers.Paging;
-using System.Collections.Generic;
-using Microsoft.Extensions.Configuration;
 
 namespace PhysicalPersonsDirectory.Services.Services.Concrete
 {
