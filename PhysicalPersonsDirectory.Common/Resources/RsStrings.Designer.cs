@@ -79,6 +79,24 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ბათუმი.
+        /// </summary>
+        public static string Batumi {
+            get {
+                return ResourceManager.GetString("Batumi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to კოლეგა.
+        /// </summary>
+        public static string Colleague {
+            get {
+                return ResourceManager.GetString("Colleague", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to პიროვნების წაშლის დროს მოხდა გაუთვალისწინებელი შეცდომა.
         /// </summary>
         public static string DeletePersonUnexpectedException {
@@ -102,6 +120,24 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         public static string EditPersonUnexpectedException {
             get {
                 return ResourceManager.GetString("EditPersonUnexpectedException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ნაცნობი.
+        /// </summary>
+        public static string Familiar {
+            get {
+                return ResourceManager.GetString("Familiar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to მდედრობითი.
+        /// </summary>
+        public static string Female {
+            get {
+                return ResourceManager.GetString("Female", resourceCulture);
             }
         }
         
@@ -133,11 +169,74 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to გორი.
+        /// </summary>
+        public static string Gori {
+            get {
+                return ResourceManager.GetString("Gori", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to სახლი.
+        /// </summary>
+        public static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ქუთაისი.
+        /// </summary>
+        public static string Kutaisi {
+            get {
+                return ResourceManager.GetString("Kutaisi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to მამრობითი.
+        /// </summary>
+        public static string Male {
+            get {
+                return ResourceManager.GetString("Male", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to მობილური.
+        /// </summary>
+        public static string Mobile {
+            get {
+                return ResourceManager.GetString("Mobile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to სამსახური.
+        /// </summary>
+        public static string Office {
+            get {
+                return ResourceManager.GetString("Office", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ოპერაცია წარმატებით შესრულდ.
         /// </summary>
         public static string OperationCompleted {
             get {
                 return ResourceManager.GetString("OperationCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to სხვა.
+        /// </summary>
+        public static string Other {
+            get {
+                return ResourceManager.GetString("Other", resourceCulture);
             }
         }
         
@@ -304,11 +403,65 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ფოთი.
+        /// </summary>
+        public static string Poti {
+            get {
+                return ResourceManager.GetString("Poti", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to დასაკავშირებელი ფიზიკური პირი ვერ მოძებნა.
         /// </summary>
         public static string RelatedPersonNotFound {
             get {
                 return ResourceManager.GetString("RelatedPersonNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ნათესავი.
+        /// </summary>
+        public static string Relative {
+            get {
+                return ResourceManager.GetString("Relative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to რუსთავი.
+        /// </summary>
+        public static string Rustavi {
+            get {
+                return ResourceManager.GetString("Rustavi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to სიღნაღი.
+        /// </summary>
+        public static string Sighnaghi {
+            get {
+                return ResourceManager.GetString("Sighnaghi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to თბილისი.
+        /// </summary>
+        public static string Tbilisi {
+            get {
+                return ResourceManager.GetString("Tbilisi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ზუგდიდი.
+        /// </summary>
+        public static string Zugdidi {
+            get {
+                return ResourceManager.GetString("Zugdidi", resourceCulture);
             }
         }
     }

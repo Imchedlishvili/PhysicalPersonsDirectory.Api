@@ -123,6 +123,12 @@
   <data name="AddRelatedPersonUnexpectedException" xml:space="preserve">
     <value>დაკავშირებული პიროვნების დამატების დროს მოხდა გაუთვალისწინებელი შეცდომა</value>
   </data>
+  <data name="Batumi" xml:space="preserve">
+    <value>ბათუმი</value>
+  </data>
+  <data name="Colleague" xml:space="preserve">
+    <value>კოლეგა</value>
+  </data>
   <data name="DeletePersonUnexpectedException" xml:space="preserve">
     <value>პიროვნების წაშლის დროს მოხდა გაუთვალისწინებელი შეცდომა</value>
   </data>
@@ -131,6 +137,12 @@
   </data>
   <data name="EditPersonUnexpectedException" xml:space="preserve">
     <value>პიროვნების ცვლილების დროს მოხდა გაუთვალისწინებელი შეცდომა</value>
+  </data>
+  <data name="Familiar" xml:space="preserve">
+    <value>ნაცნობი</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>მდედრობითი</value>
   </data>
   <data name="GetPersonDetailsUnexpectedException" xml:space="preserve">
     <value>ფიზიკური პირის დეტალური ინფორმაციის მიღებოს დროს მოხდა გაუთვალისწინებელი შეცდომა</value>
@@ -141,8 +153,29 @@
   <data name="GetRelatedPersonsUnexpectedException" xml:space="preserve">
     <value>ფიზიკური პირების და მათთან დაკავშირებული ფიზიკური პირების სიის მიღებოს დროს მოხდა გაუთვალისწინებელი შეცდომა</value>
   </data>
+  <data name="Gori" xml:space="preserve">
+    <value>გორი</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>სახლი</value>
+  </data>
+  <data name="Kutaisi" xml:space="preserve">
+    <value>ქუთაისი</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>მამრობითი</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>მობილური</value>
+  </data>
+  <data name="Office" xml:space="preserve">
+    <value>სამსახური</value>
+  </data>
   <data name="OperationCompleted" xml:space="preserve">
     <value>ოპერაცია წარმატებით შესრულდ</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>სხვა</value>
   </data>
   <data name="PersonalNumberIsRequred" xml:space="preserve">
     <value>პირადი ნომერი სავალდებულო ველია</value>
@@ -198,7 +231,25 @@
   <data name="PhoneTypeEnumNotCorrect" xml:space="preserve">
     <value>ტელეფონის ტიპი არ არის სწორი (დასაშვები მნიშვნელობებია : Mobile, Office, Home )</value>
   </data>
+  <data name="Poti" xml:space="preserve">
+    <value>ფოთი</value>
+  </data>
   <data name="RelatedPersonNotFound" xml:space="preserve">
     <value>დასაკავშირებელი ფიზიკური პირი ვერ მოძებნა</value>
+  </data>
+  <data name="Relative" xml:space="preserve">
+    <value>ნათესავი</value>
+  </data>
+  <data name="Rustavi" xml:space="preserve">
+    <value>რუსთავი</value>
+  </data>
+  <data name="Sighnaghi" xml:space="preserve">
+    <value>სიღნაღი</value>
+  </data>
+  <data name="Tbilisi" xml:space="preserve">
+    <value>თბილისი</value>
+  </data>
+  <data name="Zugdidi" xml:space="preserve">
+    <value>ზუგდიდი</value>
   </data>
 </root>
