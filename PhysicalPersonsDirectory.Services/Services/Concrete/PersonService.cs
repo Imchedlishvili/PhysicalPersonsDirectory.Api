@@ -388,20 +388,19 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
             }
         }
 
-        public GetRelatedPersonResponse GetRelatedPersons(GetRelatedPersonRequest request)
+        public GetRelatedPersonResponse GetPersonsRelatedPersons(GetRelatedPersonRequest request)
         {
             try
             {
-                var phoneQuery = (from t in _db.PersonPhones.AsNoTracking() select t);
                 var personsQuery = (from p in _db.Persons.AsNoTracking()
                                     join g in _db.Genders.AsNoTracking() on p.GenderId equals g.Id
                                     join c in _db.Citys.AsNoTracking() on p.CityId equals c.Id
-                                    select new PersonBaseModel
+                                    select new PersonModel
                                     {
                                         PersonId = p.Id,
+                                        ParentId = (int?)null,
                                         Fname = p.Fname,
                                         Lname = p.Lname,
-                                        PersonalNumber = p.PersonalNumber,
                                         BirthDate = p.BirthDate,
                                         GenderId = p.GenderId,
                                         Gender = g.GenderName,
@@ -409,8 +408,31 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
                                         City = c.CityName
                                     });
 
+                var relatedPersonsQuery = (from p in _db.Persons.AsNoTracking()
+                                           join g in _db.Genders.AsNoTracking() on p.GenderId equals g.Id
+                                           join c in _db.Citys.AsNoTracking() on p.CityId equals c.Id
+                                           join rp in _db.RelatedPersons.AsNoTracking() on p.Id equals rp.RelatedPersonId
+                                           select new PersonModel
+                                           {
+                                               PersonId = p.Id,
+                                               ParentId = rp.PersonId,
+                                               Fname = p.Fname,
+                                               Lname = p.Lname,
+                                               BirthDate = p.BirthDate,
+                                               GenderId = p.GenderId,
+                                               Gender = g.GenderName,
+                                               CityId = p.CityId,
+                                               City = c.CityName
+                                           });
 
-                return Success(new GetRelatedPersonResponse());
+                var _persons = (from t in personsQuery.Union(relatedPersonsQuery) select t).ToList();
+                var persons = (from t in _persons where t.ParentId == null select t).ToList();
+                foreach (var item in persons)
+                {
+                    item.RelatedPersons = (from t in _persons where t.ParentId == item.PersonId select t).ToList();
+                }
+
+                return Success(new GetRelatedPersonResponse() { Persons = persons });
             }
             catch (Exception ex)
             {
