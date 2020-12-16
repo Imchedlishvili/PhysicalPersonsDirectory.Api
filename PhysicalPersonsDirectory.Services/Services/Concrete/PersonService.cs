@@ -17,44 +17,43 @@ using static PhysicalPersonsDirectory.Services.Services.Helpers.ServiceResponse;
 using PhoneType = PhysicalPersonsDirectory.Common.Enums.PhoneType.PhoneType;
 using static PhysicalPersonsDirectory.Services.Services.Helpers.Paging;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 
 namespace PhysicalPersonsDirectory.Services.Services.Concrete
 {
     public class PersonService : IPersonService
     {
         private readonly PhysicalPersonsContext _db;
-        public PersonService(PhysicalPersonsContext db)
+        public IConfiguration Configuration { get; }
+        public PersonService(PhysicalPersonsContext db, IConfiguration configuration)
         {
             _db = db;
+            Configuration = configuration;
         }
 
         #region --  private methods --
 
         private PersonImageResponseModel saveImage(PersonImageRequestModel personImage)
         {
-            var d1 = AppContext.BaseDirectory;       //C:\Users\iago\source\MyRepos\PhysicalPersonsDirectory.Api\PhysicalPersonsDirectory.Api\bin\Debug\netcoreapp3.1\
-            var d2 = AppDomain.CurrentDomain.BaseDirectory; //C:\Users\iago\source\MyRepos\PhysicalPersonsDirectory.Api\PhysicalPersonsDirectory.Api\bin\Debug\netcoreapp3.1\
-            var d3 = Directory.GetCurrentDirectory(); //C:\Users\iago\source\MyRepos\PhysicalPersonsDirectory.Api\PhysicalPersonsDirectory.Api
-            var d4 = Environment.CurrentDirectory;              //C:\Users\iago\source\MyRepos\PhysicalPersonsDirectory.Api\PhysicalPersonsDirectory.Api
-            var d5 = this.GetType().Assembly.Location;          //C:\Users\iago\source\MyRepos\PhysicalPersonsDirectory.Api\PhysicalPersonsDirectory.Api\bin\Debug\netcoreapp3.1\PhysicalPersonsDirectory.Services.dll
+            var directoryPath = Path.Combine("Resources", "Images");
+            var imagePath = Path.Combine(directoryPath, $"{personImage.PersonId}.JPG");
+            var imageBytes = Convert.FromBase64String(personImage.Image);
 
-            var t1 = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); //C:\Users\iago\source\MyRepos\PhysicalPersonsDirectory.Api\PhysicalPersonsDirectory.Api\bin\Debug\netcoreapp3.1
-                                                                                      //var t2 = Path.GetDirectoryName(Application.ExecutablePath);
-            var t3 = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);     //C:\Users\iago\source\MyRepos\PhysicalPersonsDirectory.Api\PhysicalPersonsDirectory.Api\bin\Debug\netcoreapp3.1
+            if (File.Exists(imagePath))
+            {
+                File.Delete(imagePath);
+            }
 
-            var t15 = Path.GetDirectoryName("../PhysicalPersonsDirectory.Api/Resources/Images");
-            var t10 = Path.GetDirectoryName("..\\PhysicalPersonsDirectory.Api\\Resources\\Images");
-            var t11 = Path.GetDirectoryName("~\\PhysicalPersonsDirectory.Api\\Resources\\Images"); //C:\Users\iago\source\MyRepos\PhysicalPersonsDirectory.Api\PhysicalPersonsDirectory.Api\Resources\Images
-            var t20 = Path.GetDirectoryName("~/PhysicalPersonsDirectory.Api/Resources/Images");
+            if (imageBytes.Length > 0)
+            {
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    stream.Write(imageBytes, 0, imageBytes.Length);
+                    stream.Flush();
+                }
+            }
 
-
-            //var d6 = System.Net.Mime.MediaTypeNames.Application.ExecutablePath;
-            //var d7 = System.Net.Mime.MediaTypeNames.Application.StartupPath;
-
-            var folderName = Path.Combine("Resources", "Images");
-            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-
-            return Success(new PersonImageResponseModel() { ImagePatch = "" });
+            return Success(new PersonImageResponseModel() { ImagePatch = imagePath });
         }
 
         #endregion
@@ -186,6 +185,10 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
             try
             {
                 var rs = saveImage(request);
+                var person = _db.Persons.Where(t => t.Id == request.PersonId).FirstOrDefault();
+                person.ImagePatch = rs.ImagePatch;
+                _db.SaveChanges();
+
                 return Success(new AddPersonImageResponse());
             }
             catch (Exception ex)
@@ -199,6 +202,10 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
             try
             {
                 var rs = saveImage(request);
+                var person = _db.Persons.Where(t => t.Id == request.PersonId).FirstOrDefault();
+                person.ImagePatch = rs.ImagePatch;
+                _db.SaveChanges();
+
                 return Success(new EditPersonImageResponse());
             }
             catch (Exception ex)
