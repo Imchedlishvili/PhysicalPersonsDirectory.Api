@@ -391,7 +391,7 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
         public GetRelatedPersonResponse GetPersonsRelatedPersons(GetRelatedPersonRequest request)
         {
             try
-            {
+            {                
                 var personsQuery = (from p in _db.Persons.AsNoTracking()
                                     join g in _db.Genders.AsNoTracking() on p.GenderId equals g.Id
                                     join c in _db.Citys.AsNoTracking() on p.CityId equals c.Id
