@@ -232,6 +232,11 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
             try
             {
                 var rs = saveImage(request);
+                if (!rs.Success)
+                {
+                    return Fail(new EditPersonImageResponse(), rs.UserMessage);
+                }
+
                 var person = _db.Persons.Where(t => t.Id == request.PersonId).FirstOrDefault();
                 person.ImagePatch = rs.ImagePatch;
                 _db.SaveChanges();
