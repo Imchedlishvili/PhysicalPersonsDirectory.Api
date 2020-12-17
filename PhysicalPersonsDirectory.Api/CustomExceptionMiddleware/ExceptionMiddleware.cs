@@ -24,7 +24,7 @@ namespace PhysicalPersonsDirectory.Api.CustomExceptionMiddleware
             }
             catch (Exception ex)
             {
-                logger.LogError($"Something went wrong: {ex}");
+                logger.LogError($"Internal Server Error: {ex}");
                 await HandleExceptionAsync(httpContext, ex);
             }
         }
@@ -37,7 +37,7 @@ namespace PhysicalPersonsDirectory.Api.CustomExceptionMiddleware
             return context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,
-                Message = "Internal Server Error from the custom middleware."
+                Message = "Internal Server Error."
             }.ToString());
         }
     }
