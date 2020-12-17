@@ -1,4 +1,4 @@
-using FluentValidation.AspNetCore;
+﻿using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -61,8 +61,8 @@ namespace PhysicalPersonsDirectory.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseExceptionHandler("/Error"); //+
-            app.UseMiddleware<ExceptionMiddleware>(); //+
+            //app.UseExceptionHandler("/Error"); //Built-In Middleware
+            app.UseMiddleware<ExceptionMiddleware>(); //CustomExceptionMiddleware
 
             app.UseHttpsRedirection();
 

@@ -338,7 +338,6 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
 
         public GetPersonResponse GetPersons(GetPersonRequest request)
         {
-            throw new Exception();
             try
             {
                 if (request.PagingModel == null)
