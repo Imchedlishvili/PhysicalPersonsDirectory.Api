@@ -6,7 +6,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace PhysicalPersonsDirectory.Api.CustomExceptionMiddleware
+namespace PhysicalPersonsDirectory.Api.Middlewares
 {
     public class ExceptionMiddleware
     {

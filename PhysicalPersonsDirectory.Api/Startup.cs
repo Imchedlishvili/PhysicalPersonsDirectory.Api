@@ -1,6 +1,7 @@
 ﻿using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
@@ -8,11 +9,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PhysicalPersonsDirectory.Api.CustomExceptionMiddleware;
+using PhysicalPersonsDirectory.Api.Extensions;
 using PhysicalPersonsDirectory.Api.Filters;
 using PhysicalPersonsDirectory.Domain;
 using PhysicalPersonsDirectory.Services.Services.Abstract;
 using PhysicalPersonsDirectory.Services.Services.Concrete;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PhysicalPersonsDirectory.Api
 {
@@ -28,6 +31,21 @@ namespace PhysicalPersonsDirectory.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[] { "ka-Ge", "en-US" };
+                options.AddSupportedCultures(supportedCultures);
+                options.AddSupportedUICultures(supportedCultures);
+
+                options.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(context =>
+                {
+                    var userLangs = context.Request.Headers["Accept-Language"].ToString();
+                    var firstLang = userLangs.Split(',').FirstOrDefault();
+                    var defaultLang = string.IsNullOrEmpty(firstLang) ? "ka" : firstLang;
+                    return Task.FromResult(new ProviderCultureResult(defaultLang, defaultLang));
+                }));
+            });
+
             services.AddControllers();
 
             services.AddMvc(options => { options.Filters.Add<ValidationFilter>(); })
@@ -44,17 +62,14 @@ namespace PhysicalPersonsDirectory.Api
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            // specifying the Swagger JSON endpoint.
+        {            
+            app.UseSwagger();           
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Physical Persons Directory Api");
             });
 
+            app.UseRequestLocalization();
 
             if (env.IsDevelopment())
             {
@@ -62,7 +77,7 @@ namespace PhysicalPersonsDirectory.Api
             }
 
             app.UseExceptionHandler("/Error"); //Built-In Middleware
-            //app.UseMiddleware<ExceptionMiddleware>(); //CustomExceptionMiddleware
+            //app.ConfigureCustomExceptionMiddleware(); //CustomExceptionMiddleware
 
             app.UseHttpsRedirection();
 
