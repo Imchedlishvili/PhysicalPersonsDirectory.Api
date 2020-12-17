@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhysicalPersonsDirectory.Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhysicalPersonsDirectory.Domain", "PhysicalPersonsDirectory.Domain\PhysicalPersonsDirectory.Domain.csproj", "{989BE251-4A47-4DA6-A1FB-D36D7DB6ECFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhysicalPersonsDirectory.Common", "PhysicalPersonsDirectory.Common\PhysicalPersonsDirectory.Common.csproj", "{DB0EC8C4-CBC1-41AE-A0F6-7418013AB159}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhysicalPersonsDirectory.Common", "PhysicalPersonsDirectory.Common\PhysicalPersonsDirectory.Common.csproj", "{DB0EC8C4-CBC1-41AE-A0F6-7418013AB159}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhysicalPersonsDirectory.Services", "PhysicalPersonsDirectory.Services\PhysicalPersonsDirectory.Services.csproj", "{BD44B76B-F87F-4479-B6B4-90231F7BA302}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhysicalPersonsDirectory.Services", "PhysicalPersonsDirectory.Services\PhysicalPersonsDirectory.Services.csproj", "{BD44B76B-F87F-4479-B6B4-90231F7BA302}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhysicalPersonsDirectory.Services.Models", "PhysicalPersonsDirectory.Services.Models\PhysicalPersonsDirectory.Services.Models.csproj", "{FDCD0E45-6B83-44A0-A922-1FC1147D0749}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhysicalPersonsDirectory.Services.Models", "PhysicalPersonsDirectory.Services.Models\PhysicalPersonsDirectory.Services.Models.csproj", "{FDCD0E45-6B83-44A0-A922-1FC1147D0749}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

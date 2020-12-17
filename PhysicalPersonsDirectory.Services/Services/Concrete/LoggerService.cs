@@ -1,7 +1,7 @@
 ﻿using PhysicalPersonsDirectory.Domain;
+using PhysicalPersonsDirectory.Domain.DomainClasses;
 using PhysicalPersonsDirectory.Services.Services.Abstract;
 using System;
-using logError = PhysicalPersonsDirectory.Domain.DomainClasses.LogError;
 
 namespace PhysicalPersonsDirectory.Services.Services.Concrete
 {
@@ -12,12 +12,12 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
         {
             _db = db;
         }
-         
+
         public void LogError(string message)
         {
             try
             {
-                _db.LogErrors.Add(new logError { LogInfo = message });
+                _db.LogErrors.Add(new LogError { LogInfo = message });
                 _db.SaveChanges();
             }
             catch (Exception ex)

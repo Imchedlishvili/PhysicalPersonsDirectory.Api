@@ -2,6 +2,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ using PhysicalPersonsDirectory.Api.Filters;
 using PhysicalPersonsDirectory.Domain;
 using PhysicalPersonsDirectory.Services.Services.Abstract;
 using PhysicalPersonsDirectory.Services.Services.Concrete;
+using System.Linq;
 
 namespace PhysicalPersonsDirectory.Api
 {
@@ -37,6 +39,7 @@ namespace PhysicalPersonsDirectory.Api
             services.AddSwaggerGen();
 
             services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<ILoggerService, LoggerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,9 +50,9 @@ namespace PhysicalPersonsDirectory.Api
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
             // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
+            app.UseSwaggerUI(options =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Physical Persons Directory Api");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Physical Persons Directory Api");
             });
 
 
@@ -58,7 +61,8 @@ namespace PhysicalPersonsDirectory.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMiddleware<ExceptionMiddleware>();
+            //app.UseExceptionHandler("/Error"); //+
+            app.UseMiddleware<ExceptionMiddleware>(); //+
 
             app.UseHttpsRedirection();
 

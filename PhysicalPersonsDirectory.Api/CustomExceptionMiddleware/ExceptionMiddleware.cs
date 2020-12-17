@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
+using Microsoft.AspNetCore.Http;
 using PhysicalPersonsDirectory.Services.Models.Base;
 using PhysicalPersonsDirectory.Services.Services.Abstract;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -12,15 +11,12 @@ namespace PhysicalPersonsDirectory.Api.CustomExceptionMiddleware
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILoggerService _logger;
-
-        public ExceptionMiddleware(RequestDelegate next, ILoggerService logger)
+        public ExceptionMiddleware(RequestDelegate next)
         {
-            _logger = logger;
-            _next = next;
+            _next = next;                     
         }
 
-        public async Task InvokeAsync(HttpContext httpContext)
+        public async Task InvokeAsync(HttpContext httpContext, ILoggerService logger)
         {
             try
             {
@@ -28,7 +24,7 @@ namespace PhysicalPersonsDirectory.Api.CustomExceptionMiddleware
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong: {ex}");
+                logger.LogError($"Something went wrong: {ex}");
                 await HandleExceptionAsync(httpContext, ex);
             }
         }
@@ -36,7 +32,7 @@ namespace PhysicalPersonsDirectory.Api.CustomExceptionMiddleware
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;  
+            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
             return context.Response.WriteAsync(new ErrorDetails()
             {
