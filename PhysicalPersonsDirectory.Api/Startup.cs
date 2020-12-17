@@ -61,8 +61,8 @@ namespace PhysicalPersonsDirectory.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseExceptionHandler("/Error"); //Built-In Middleware
-            app.UseMiddleware<ExceptionMiddleware>(); //CustomExceptionMiddleware
+            app.UseExceptionHandler("/Error"); //Built-In Middleware
+            //app.UseMiddleware<ExceptionMiddleware>(); //CustomExceptionMiddleware
 
             app.UseHttpsRedirection();
 

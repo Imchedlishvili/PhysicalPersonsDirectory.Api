@@ -159,6 +159,9 @@
   <data name="Home" xml:space="preserve">
     <value>სახლი</value>
   </data>
+  <data name="ImageFormatNotCorrect" xml:space="preserve">
+    <value>არასწორი ფორმატის ფაილი არის გადმოწოდებული</value>
+  </data>
   <data name="Kutaisi" xml:space="preserve">
     <value>ქუთაისი</value>
   </data>

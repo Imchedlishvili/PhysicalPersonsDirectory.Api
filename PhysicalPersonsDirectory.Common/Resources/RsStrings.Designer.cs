@@ -187,6 +187,15 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to არასწორი ფორმატის ფაილი არის გადმოწოდებული.
+        /// </summary>
+        public static string ImageFormatNotCorrect {
+            get {
+                return ResourceManager.GetString("ImageFormatNotCorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ქუთაისი.
         /// </summary>
         public static string Kutaisi {

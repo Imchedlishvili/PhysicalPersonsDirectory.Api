@@ -16,7 +16,10 @@ using System.IO;
 using System.Linq;
 using static PhysicalPersonsDirectory.Services.Services.Helpers.Paging;
 using static PhysicalPersonsDirectory.Services.Services.Helpers.ServiceResponse;
+using static System.Net.Mime.MediaTypeNames;
 using PhoneType = PhysicalPersonsDirectory.Common.Enums.PhoneType.PhoneType;
+using System.Drawing;
+using Image = System.Drawing.Image;
 
 namespace PhysicalPersonsDirectory.Services.Services.Concrete
 {
@@ -32,8 +35,31 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
 
         #region --  private methods --
 
+        public bool IsImage(string base64String)
+        {
+            try
+            {
+                var imageBytes = Convert.FromBase64String(base64String);
+                var ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+
+                ms.Write(imageBytes, 0, imageBytes.Length);
+                var image = Image.FromStream(ms, true);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         private PersonImageResponseModel saveImage(PersonImageRequestModel personImage)
         {
+            if (!IsImage(personImage.Image))
+            {
+                return Fail(new PersonImageResponseModel(), RsStrings.ImageFormatNotCorrect);
+            }
+
             var directoryPath = Path.Combine("Resources", "Images");
             var imagePath = Path.Combine(directoryPath, $"{personImage.PersonId}.JPG");
             var imageBytes = Convert.FromBase64String(personImage.Image);
@@ -184,6 +210,11 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
             try
             {
                 var rs = saveImage(request);
+                if (!rs.Success)
+                {
+                    return Fail(new AddPersonImageResponse(), rs.UserMessage);
+                }
+
                 var person = _db.Persons.Where(t => t.Id == request.PersonId).FirstOrDefault();
                 person.ImagePatch = rs.ImagePatch;
                 _db.SaveChanges();
