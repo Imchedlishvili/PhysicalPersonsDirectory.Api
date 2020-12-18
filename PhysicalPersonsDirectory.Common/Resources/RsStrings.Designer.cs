@@ -189,9 +189,9 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to არასწორი ფორმატის ფაილი არის გადმოწოდებული.
         /// </summary>
-        public static string ImageFormatNotCorrect {
+        public static string ImageFormatIsNotCorrect {
             get {
-                return ResourceManager.GetString("ImageFormatNotCorrect", resourceCulture);
+                return ResourceManager.GetString("ImageFormatIsNotCorrect", resourceCulture);
             }
         }
         
@@ -336,6 +336,24 @@ namespace PhysicalPersonsDirectory.Common.Resources {
         public static string PersonFnameRestrict {
             get {
                 return ResourceManager.GetString("PersonFnameRestrict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ფიზიკური პირის იდენთიფიკატორი არ არის ვალიდური.
+        /// </summary>
+        public static string PersonIdIsNotCorrect {
+            get {
+                return ResourceManager.GetString("PersonIdIsNotCorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to სურათის ველი სავალდებულოა.
+        /// </summary>
+        public static string PersonImageIsRequred {
+            get {
+                return ResourceManager.GetString("PersonImageIsRequred", resourceCulture);
             }
         }
         

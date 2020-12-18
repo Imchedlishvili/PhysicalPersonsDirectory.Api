@@ -159,7 +159,7 @@
   <data name="Home" xml:space="preserve">
     <value>სახლი</value>
   </data>
-  <data name="ImageFormatNotCorrect" xml:space="preserve">
+  <data name="ImageFormatIsNotCorrect" xml:space="preserve">
     <value>არასწორი ფორმატის ფაილი არის გადმოწოდებული</value>
   </data>
   <data name="Kutaisi" xml:space="preserve">
@@ -209,6 +209,12 @@
   </data>
   <data name="PersonFnameRestrict" xml:space="preserve">
     <value>სახელი უნდა შეიცავდეს მხოლოდ ქართული ან ლათინური ანბანის ასოებს</value>
+  </data>
+  <data name="PersonIdIsNotCorrect" xml:space="preserve">
+    <value>ფიზიკური პირის იდენთიფიკატორი არ არის ვალიდური</value>
+  </data>
+  <data name="PersonImageIsRequred" xml:space="preserve">
+    <value>სურათის ველი სავალდებულოა</value>
   </data>
   <data name="PersonLnameIsRequred" xml:space="preserve">
     <value>ფიზიკური პირის გვარი სავალდებულო ველია</value>

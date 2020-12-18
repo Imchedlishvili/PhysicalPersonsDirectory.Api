@@ -57,7 +57,7 @@ namespace PhysicalPersonsDirectory.Services.Services.Concrete
         {
             if (!IsImage(personImage.Image))
             {
-                return Fail(new PersonImageResponseModel(), RsStrings.ImageFormatNotCorrect);
+                return Fail(new PersonImageResponseModel(), RsStrings.ImageFormatIsNotCorrect);
             }
 
             var directoryPath = Path.Combine("Resources", "Images");
