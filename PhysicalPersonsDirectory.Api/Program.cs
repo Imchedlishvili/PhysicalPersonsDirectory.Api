@@ -16,7 +16,6 @@ namespace PhysicalPersonsDirectory.Api
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<PhysicalPersonsContext>();
                 HelperInitializeData.Initialize(services);
             }
             host.Run();
