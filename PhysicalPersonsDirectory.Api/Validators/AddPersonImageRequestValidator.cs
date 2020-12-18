@@ -8,16 +8,15 @@ namespace PhysicalPersonsDirectory.Api.Validators
     {
         public AddPersonImageRequestValidator()
         {
-            RuleFor(t => t.PersonId).NotEmpty().WithMessage(RsStrings.PersonFnameIsRequred)
-                                 .Custom((personId, context) =>
-                                 {
-                                     if (personId < 0)
-                                     {
-                                         context.AddFailure(RsStrings.PersonIdIsNotCorrect);
-                                     }
-                                 });
+            RuleFor(t => t.PersonId).Custom((personId, context) =>
+            {
+                if (personId <= 0)
+                {
+                    context.AddFailure(RsStrings.PersonIdIsNotCorrect);
+                }
+            });
 
-            RuleFor(t => t.Image).NotEmpty().WithMessage(RsStrings.PersonLnameIsRequred);
+            RuleFor(t => t.Image).NotEmpty().WithMessage(RsStrings.PersonImageIsRequred);
         }
     }
 }
